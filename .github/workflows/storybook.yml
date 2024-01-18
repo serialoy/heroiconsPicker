@@ -1,0 +1,22 @@
+name: Build Storybook
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Build-Storybook:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: |
+          npm install
+          npm run build-storybook
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.3
+        with:
+          branch: gh-pages
+          folder: storybook-static
