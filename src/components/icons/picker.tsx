@@ -64,22 +64,23 @@ const Picker: React.FC<PickerProps> = ({ setValue, iconDefaultStyle, iconClassNa
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', maxHeight: '500px' }}>
-      <div>
+      <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', marginBottom: '8px', gap: '8px' }}>
         <input
           type="text"
           placeholder="Search icons"
           value={searchText}
           onChange={handleSearchChange}
-          style={{ marginBottom: '8px' }}
         />
-        <label>
-          <input type="radio" value="outline" checked={!isSolid} onChange={handleRadioChange} />
-          Outline
-        </label>
-        <label>
-          <input type="radio" value="solid" checked={isSolid} onChange={handleRadioChange} />
-          Solid
-        </label>
+        <div>
+          <label style={{whiteSpace: "nowrap"}}>
+            <input type="radio" value="outline" checked={!isSolid} onChange={handleRadioChange} />
+            Outline
+          </label>
+          <label style={{whiteSpace: "nowrap"}}>
+            <input type="radio" value="solid" checked={isSolid} onChange={handleRadioChange} />
+            Solid
+          </label>
+        </div>
       </div>
       <div style={{
         display: 'flex',
