@@ -1,18 +1,29 @@
 import React, { Suspense, useState } from 'react'
 import { outlineIcons24, solidIcons24 } from './picker.icons'
-import { PickerProps } from './picker.types'
+import { IconObj, PickerProps } from './picker.types'
 
-const Icon = (iconName: keyof typeof outlineIcons24, size: number | string, isSolid: boolean) => {
+const Icon = (
+  iconName: keyof typeof outlineIcons24,
+  size: number | string,
+  isSolid: boolean,
+  style?: React.CSSProperties,
+  className?: string
+) => {
   const icons = isSolid ? solidIcons24 : outlineIcons24;
   const Icon = icons[iconName]
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Icon height={size} width={size} />
+      <Icon
+        height={size}
+        width={size}
+        style={style}
+        className={className}
+      />
     </Suspense>
   )
 }
 
-const Picker: React.FC<PickerProps> = () => {
+const Picker: React.FC<PickerProps> = ({ setValue, iconDefaultStyle, iconClassName }) => {
   const [searchText, setSearchText] = useState<string>('');
   const [isSolid, setIsSolid] = useState<boolean>(false);
 
@@ -38,20 +49,29 @@ const Picker: React.FC<PickerProps> = () => {
     setIsSolid((prevIsSolid) => !prevIsSolid);
   };
 
+  const handleIconClick = (iconName: keyof typeof outlineIcons24) => {
+    const icon: IconObj = {
+      name: iconName,
+      type: isSolid ? 'solid' : 'outline',
+      size: '24',
+    };
+    setValue(icon);
+  }
+
   const filteredIcons = Object.keys(isSolid ? solidIcons24 : outlineIcons24).filter(
     (name) => name.toLowerCase().includes(searchText.toLowerCase())
   );
 
   return (
-    <div style={{overflow: 'hidden', maxHeight: '100%'}}>
-      <input
-        type="text"
-        placeholder="Search icons"
-        value={searchText}
-        onChange={handleSearchChange}
-        style={{ marginBottom: '8px' }}
-      />
+    <div style={{ display: 'flex', flexDirection: 'column', maxHeight: '500px' }}>
       <div>
+        <input
+          type="text"
+          placeholder="Search icons"
+          value={searchText}
+          onChange={handleSearchChange}
+          style={{ marginBottom: '8px' }}
+        />
         <label>
           <input type="radio" value="outline" checked={!isSolid} onChange={handleRadioChange} />
           Outline
@@ -61,7 +81,16 @@ const Picker: React.FC<PickerProps> = () => {
           Solid
         </label>
       </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', border: 'groove gray', maxHeight: '500x', maxWidth: '560px', overflowY: 'auto' }}>
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'center',
+        border: 'groove gray',
+        height: '100%',
+        maxWidth: '560px',
+        overflowY: 'auto'
+      }}>
         {filteredIcons.map((name) => (
           <div
             key={name}
@@ -76,8 +105,15 @@ const Picker: React.FC<PickerProps> = () => {
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
             data-tooltip={name}
+            onClick={() => handleIconClick(name as keyof typeof outlineIcons24)}
           >
-            {Icon(name as keyof typeof outlineIcons24, "100%", isSolid)}
+            {Icon(
+              name as keyof typeof outlineIcons24,
+              "100%",
+              isSolid,
+              iconDefaultStyle,
+              iconClassName
+            )}
           </div>
         ))}
       </div>

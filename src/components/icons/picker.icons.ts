@@ -1,5 +1,4 @@
 import { lazy } from "react";
-// import { AcademicCapIcon } from "@heroicons/react/24/solid";
 
 export const outlineIcons24 = {
   AcademicCapIcon: lazy(() => import("@heroicons/react/24/outline/AcademicCapIcon")),
