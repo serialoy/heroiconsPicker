@@ -1,5 +1,6 @@
+/// <reference types="react" />
 import * as react from 'react';
-import { ReactNode } from 'react';
+import react__default, { ReactNode } from 'react';
 
 declare const outlineIcons24: {
     AcademicCapIcon: react.LazyExoticComponent<react.ForwardRefExoticComponent<Omit<react.SVGProps<SVGSVGElement>, "ref"> & {
@@ -1163,9 +1164,13 @@ interface IconObj {
     size: '24';
 }
 
+declare const Picker: react__default.FC<PickerProps>;
+
 interface IconProps {
     icon: IconObj;
     fallback: ReactNode;
 }
 
-export type { IconObj, IconProps, PickerProps };
+declare const Icon: react__default.FC<IconProps>;
+
+export { Icon, type IconObj, type IconProps, Picker, type PickerProps };

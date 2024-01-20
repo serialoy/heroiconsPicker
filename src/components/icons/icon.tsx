@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { outlineIcons24, solidIcons24 } from './picker.icons'
 import type { IconProps } from './icon.types'
 
-const Icon: React.FC<IconProps> = ({ icon, fallback }) => {
+export const Icon: React.FC<IconProps> = ({ icon, fallback }) => {
   const pickIcon = () => {
     const { name, type, size } = icon;
     const icons = type === 'solid' ? solidIcons24 : outlineIcons24;
@@ -15,5 +15,3 @@ const Icon: React.FC<IconProps> = ({ icon, fallback }) => {
   }
   return <>{ pickIcon() }</>
 }
-
-export default Icon

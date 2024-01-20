@@ -1,7 +1,7 @@
 {
   "name": "heroicons-picker",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.1.2",
+  "description": "Icon picker and rendering component. Based on heroicons/react",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",

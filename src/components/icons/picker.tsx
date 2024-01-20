@@ -23,7 +23,7 @@ const Icon = (
   )
 }
 
-const Picker: React.FC<PickerProps> = ({ setValue, iconDefaultStyle, iconClassName }) => {
+export const Picker: React.FC<PickerProps> = ({ setValue, iconDefaultStyle, iconClassName }) => {
   const [searchText, setSearchText] = useState<string>('');
   const [isSolid, setIsSolid] = useState<boolean>(false);
 
@@ -121,5 +121,3 @@ const Picker: React.FC<PickerProps> = ({ setValue, iconDefaultStyle, iconClassNa
     </div>
   );
 }
-
-export default Picker
